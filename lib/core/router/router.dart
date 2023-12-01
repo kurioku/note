@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 
+import '../../resource/model/note.dart';
 import '../../view/page/editor.dart';
 import '../../view/page/folder.dart';
 import '../../view/page/home.dart';
@@ -15,13 +16,20 @@ final router = GoRouter(
           path: ':id',
           builder: (_, state) => FolderPage(
             id: state.pathParameters['id']!,
-            index: state.extra as int,
+            folder: state.extra as Folder,
           ),
           routes: [
             GoRoute(
-              path: ':id',
-              builder: (_, state) => const EditorPage(),
-            )
+              path: 'editor',
+              builder: (_, __) => const EditorPage(),
+            ),
+            GoRoute(
+              path: ':note',
+              builder: (_, state) => EditorPage(
+                id: state.pathParameters['note'],
+                note: state.extra as Note,
+              ),
+            ),
           ],
         ),
       ],

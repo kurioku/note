@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../core/router/router.dart';
 import '../model/note.dart';
 
 part 'note_pod.g.dart';
@@ -16,20 +17,19 @@ class Folders extends _$Folders {
 
   void addFolder(String title) {
     if (title.isNotEmpty) {
-      state = [
-        ...state,
-        Folder(id: _uuid.v4(), title: title),
-      ];
+      state = [...state, Folder(id: _uuid.v4(), title: title)];
     }
+    router.pop();
   }
 
   void editFolder({required String id, required String title}) {
     if (title.isNotEmpty) {
       state = [
         for (final folder in state)
-          if (folder.id == id) folder.copyWith(title: title) else folder,
+          if (folder.id == id) folder.copyWith(title: title) else folder
       ];
     }
+    router.pop();
   }
 
   void removeFolder(Folder target) {
@@ -37,18 +37,20 @@ class Folders extends _$Folders {
   }
 
   void addNote(String title, String body, String id) {
-    state = [
-      for (final folder in state)
-        if (folder.id == id)
-          folder.copyWith(
-            notes: [
-              ...folder.notes,
-              Note(id: _uuid.v4(), title: title, body: body),
-            ],
-          )
-        else
-          folder,
-    ];
+    if (title.isNotEmpty) {
+      state = [
+        for (final folder in state)
+          if (folder.id == id)
+            folder.copyWith(
+              notes: [
+                ...folder.notes,
+                Note(id: _uuid.v4(), title: title, body: body),
+              ],
+            )
+          else
+            folder
+      ];
+    }
   }
 
   void editNote({
@@ -64,12 +66,11 @@ class Folders extends _$Folders {
             if (note.id == nID)
               folder.copyWith(
                 notes: [
-                  ...folder.notes,
-                  Note(id: nID, title: title, body: body),
+                  note.copyWith(title: title, body: body),
                 ],
               )
             else
-              folder,
+              folder
     ];
   }
 
@@ -81,7 +82,25 @@ class Folders extends _$Folders {
             notes: [...folder.notes].where((n) => n.id != target.id).toList(),
           )
         else
-          folder,
+          folder
     ];
+  }
+
+  void updateNote({String? id, String? nID, required title, required body}) {
+    final read = ref.read(foldersPod.notifier);
+    if (title.isNotEmpty) {
+      if (id == null) {
+        for (int i = 0; i < state.length; i++) {
+          [read.addNote(title, body, state[i].id)];
+        }
+      } else {
+        for (int i = 0; i < state.length; i++) {
+          [
+            read.editNote(fID: state[i].id, nID: nID!, title: title, body: body)
+          ];
+        }
+      }
+      router.pop();
+    }
   }
 }

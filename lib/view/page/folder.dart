@@ -15,6 +15,7 @@ class FolderPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final watch = ref.watch(foldersPod);
+    final read = ref.read(foldersPod.notifier);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(title: Text(watch[index].title)),
@@ -24,13 +25,28 @@ class FolderPage extends ConsumerWidget {
         itemBuilder: (_, i) {
           return ListTile(
             title: Text(watch[index].notes[i].title),
-            onTap: () => router.push('/id/note', extra: watch[index].notes[i]),
+            onTap: () => router.push(
+              '/folder/note',
+              extra: watch[index].notes[i],
+            ),
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => router.push('/id/editor'),
         child: const Icon(Icons.add),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (_) {
+              return AlertDialog(
+                content: TextField(
+                  autofocus: true,
+                  onSubmitted: (title) => read.addNote(watch[index].id, title),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }

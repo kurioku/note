@@ -36,7 +36,7 @@ class Folders extends _$Folders {
     state = [...state].where((f) => f.id != target.id).toList();
   }
 
-  void addNote(String id, String title, String body) {
+  void addNote(String id, String title) {
     if (title.isNotEmpty) {
       state = [
         for (final folder in state)
@@ -44,36 +44,32 @@ class Folders extends _$Folders {
             folder.copyWith(
               notes: [
                 ...folder.notes,
-                Note(id: _uuid.v4(), title: title, body: body),
+                Note(id: _uuid.v4(), title: title, body: ''),
               ],
             )
           else
             folder
       ];
     }
+    router.pop();
   }
 
-  void editNote({
-    required String f,
-    required String n,
-    required String title,
-    required String body,
-  }) {
-    state = [
-      for (final folder in state)
-        if (folder.id == f)
+  void editNote(String id, String title, String body) {
+    if (title.isNotEmpty) {
+      state = [
+        for (final folder in state)
           folder.copyWith(
             notes: [
               for (final note in folder.notes)
-                if (note.id == n)
+                if (note.id == id)
                   note.copyWith(title: title, body: body)
                 else
                   note
             ],
           )
-        else
-          folder
-    ];
+      ];
+    }
+    router.pop();
   }
 
   void removeNote(String id, Note target) {
@@ -86,20 +82,5 @@ class Folders extends _$Folders {
         else
           folder
     ];
-  }
-
-  void write({String? id, required String title, required String body}) {
-    if (title.isNotEmpty) {
-      if (id == null) {
-        for (int i = 0; i < state.length; i++) {
-          addNote(title, body, state[i].id);
-        }
-      } else {
-        for (int i = 0; i < state.length; i++) {
-          editNote(f: state[i].id, n: id, title: title, body: body);
-        }
-      }
-    }
-    router.pop();
   }
 }

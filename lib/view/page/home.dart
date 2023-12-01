@@ -20,7 +20,7 @@ class HomePage extends ConsumerWidget {
         itemBuilder: (_, i) {
           return ListTile(
             title: Text(watch[i].title),
-            onTap: () => router.push('/id', extra: i),
+            onTap: () => router.push('/folder', extra: i),
           );
         },
       ),

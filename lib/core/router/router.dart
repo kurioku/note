@@ -13,17 +13,13 @@ final router = GoRouter(
       builder: (_, __) => const HomePage(),
       routes: [
         GoRoute(
-          path: ':id',
+          path: 'folder',
           builder: (_, state) => FolderPage(
             index: state.extra as int,
           ),
           routes: [
             GoRoute(
-              path: 'editor',
-              builder: (_, __) => const EditorPage(),
-            ),
-            GoRoute(
-              path: ':note',
+              path: 'note',
               builder: (_, state) => EditorPage(
                 note: state.extra as Note,
               ),

@@ -5,7 +5,7 @@ part 'note.g.dart';
 
 @freezed
 class Note with _$Note {
-  factory Note({
+  const factory Note({
     required String id,
     required String title,
     required String body,
@@ -16,7 +16,7 @@ class Note with _$Note {
 
 @freezed
 class Folder with _$Folder {
-  factory Folder({
+  const factory Folder({
     required String id,
     required String title,
     @Default(<Note>[]) List<Note> notes,

@@ -22,7 +22,7 @@ class Folders extends _$Folders {
     router.pop();
   }
 
-  void editFolder({required String id, required String title}) {
+  void editFolder(String id, String title) {
     if (title.isNotEmpty) {
       state = [
         for (final folder in state)
@@ -33,10 +33,10 @@ class Folders extends _$Folders {
   }
 
   void removeFolder(Folder target) {
-    state = state.where((f) => f.id != target.id).toList();
+    state = [...state].where((f) => f.id != target.id).toList();
   }
 
-  void addNote(String title, String body, String id) {
+  void addNote(String id, String title, String body) {
     if (title.isNotEmpty) {
       state = [
         for (final folder in state)
@@ -54,23 +54,25 @@ class Folders extends _$Folders {
   }
 
   void editNote({
-    required String fID,
-    required String nID,
+    required String f,
+    required String n,
     required String title,
     required String body,
   }) {
     state = [
       for (final folder in state)
-        if (folder.id == fID)
-          for (final note in folder.notes)
-            if (note.id == nID)
-              folder.copyWith(
-                notes: [
-                  note.copyWith(title: title, body: body),
-                ],
-              )
-            else
-              folder
+        if (folder.id == f)
+          folder.copyWith(
+            notes: [
+              for (final note in folder.notes)
+                if (note.id == n)
+                  note.copyWith(title: title, body: body)
+                else
+                  note
+            ],
+          )
+        else
+          folder
     ];
   }
 
@@ -86,21 +88,18 @@ class Folders extends _$Folders {
     ];
   }
 
-  void updateNote({String? id, String? nID, required title, required body}) {
-    final read = ref.read(foldersPod.notifier);
+  void write({String? id, required String title, required String body}) {
     if (title.isNotEmpty) {
       if (id == null) {
         for (int i = 0; i < state.length; i++) {
-          [read.addNote(title, body, state[i].id)];
+          addNote(title, body, state[i].id);
         }
       } else {
         for (int i = 0; i < state.length; i++) {
-          [
-            read.editNote(fID: state[i].id, nID: nID!, title: title, body: body)
-          ];
+          editNote(f: state[i].id, n: id, title: title, body: body);
         }
       }
-      router.pop();
     }
+    router.pop();
   }
 }

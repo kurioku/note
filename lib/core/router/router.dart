@@ -15,8 +15,7 @@ final router = GoRouter(
         GoRoute(
           path: ':id',
           builder: (_, state) => FolderPage(
-            id: state.pathParameters['id']!,
-            folder: state.extra as Folder,
+            index: state.extra as int,
           ),
           routes: [
             GoRoute(
@@ -26,7 +25,6 @@ final router = GoRouter(
             GoRoute(
               path: ':note',
               builder: (_, state) => EditorPage(
-                id: state.pathParameters['note'],
                 note: state.extra as Note,
               ),
             ),

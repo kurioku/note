@@ -21,7 +21,6 @@ class EditorPage extends HookConsumerWidget {
     final folder = ref.watch(folderIntPod);
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           leading: IconButton(

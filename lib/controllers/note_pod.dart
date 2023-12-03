@@ -1,9 +1,9 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../core/router/router.dart';
-import '../../data/source/storage.dart';
-import '../model/note.dart';
+import '../utils/router/router.dart';
+import '../services/storage.dart';
+import '../models/note.dart';
 
 part 'note_pod.g.dart';
 

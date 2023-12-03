@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'core/router/router.dart';
-import 'core/theme/theme.dart';
-import 'core/theme/theme_pod.dart';
+import 'utils/router/router.dart';
+import 'utils/theme/theme.dart';
+import 'utils/theme/theme_pod.dart';
 
 late final SharedPreferences prefs;
 

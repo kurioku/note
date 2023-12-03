@@ -2,7 +2,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:convert';
 import 'dart:io';
 
-import '../../resource/model/note.dart';
+import '../models/note.dart';
 
 Future<void> save(List<Folder> folders) async {
   final directory = await getApplicationDocumentsDirectory();

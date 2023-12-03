@@ -16,7 +16,7 @@ class NoteList extends ConsumerWidget {
     return watch.isEmpty
         ? const SizedBox()
         : ListView.separated(
-            separatorBuilder: (_, __) => const Divider(),
+            separatorBuilder: (_, __) => const Divider(height: 0),
             shrinkWrap: true,
             itemCount: watch[selected].notes.length,
             itemBuilder: (_, i) {

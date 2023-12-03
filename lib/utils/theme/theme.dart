@@ -15,10 +15,7 @@ class Themes {
       onPrimary: Colors.black,
       surfaceTint: Colors.transparent,
     ),
-    dividerTheme: const DividerThemeData(
-      color: Colors.black26,
-      space: 0,
-    ),
+    dividerTheme: const DividerThemeData(color: Colors.black26),
     drawerTheme: const DrawerThemeData(width: 200),
     dialogTheme: const DialogTheme(
       titleTextStyle: TextStyle(color: Colors.black, fontSize: 25),
@@ -70,10 +67,7 @@ class Themes {
       surface: Colors.black,
       surfaceTint: Colors.transparent,
     ),
-    dividerTheme: const DividerThemeData(
-      color: Colors.white24,
-      space: 0,
-    ),
+    dividerTheme: const DividerThemeData(color: Colors.white24),
     drawerTheme: const DrawerThemeData(width: 200),
     dialogTheme: const DialogTheme(
       backgroundColor: Colors.black,

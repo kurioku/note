@@ -25,22 +25,23 @@ class HomePage extends ConsumerWidget {
         ],
       ),
       drawer: Drawer(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            const SizedBox(height: 32),
-            IconButton(
-              icon: const Icon(Icons.create_new_folder),
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (_) => const NewFolder(),
-                );
-              },
-            ),
-            const Divider(),
-            const FolderList(),
-          ],
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.create_new_folder),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (_) => const NewFolder(),
+                  );
+                },
+              ),
+              const Divider(),
+              const FolderList(),
+            ],
+          ),
         ),
       ),
       body: const NoteList(),

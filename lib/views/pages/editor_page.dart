@@ -43,7 +43,7 @@ class EditorPage extends HookConsumerWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10),
         child: TextField(
           controller: body,
           focusNode: focus,

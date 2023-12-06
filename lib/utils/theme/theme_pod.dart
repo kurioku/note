@@ -27,11 +27,13 @@ ThemeMode theme(ThemeRef ref) {
 @riverpod
 Icon themeIcon(ThemeIconRef ref) {
   final value = ref.watch(themeIntPod);
-
-  if (value == 0) {
-    return const Icon(Icons.brightness_6_outlined);
-  } else if (value == 1) {
-    return const Icon(Icons.brightness_7);
+  switch (value) {
+    case 0:
+      return const Icon(Icons.brightness_6_outlined);
+    case 1:
+      return const Icon(Icons.brightness_7);
+    case 2:
+      return const Icon(Icons.brightness_4_outlined);
   }
-  return const Icon(Icons.brightness_4_outlined);
+  throw UnimplementedError();
 }

@@ -20,8 +20,7 @@ Future<List<Folder>> load() async {
   if (await file.exists()) {
     final jsonString = await file.readAsString();
     final List jsonList = jsonDecode(jsonString);
-    final folders = jsonList.map((f) => Folder.fromJson(f)).toList();
-    return folders;
+    return jsonList.map((f) => Folder.fromJson(f)).toList();
   }
 
   return [];

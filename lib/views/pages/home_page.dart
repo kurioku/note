@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../controllers/selected_pod.dart';
-import '../../utils/router/router.dart';
-import '../../controllers/note_pod.dart';
+import '/controllers/note_pod.dart';
+import '/controllers/selected_pod.dart';
+import '/utils/router/router.dart';
 import '../dialogs/new_folder.dart';
 import '../widgets/folder_list.dart';
 import '../widgets/home_menu.dart';
@@ -19,7 +19,7 @@ class HomePage extends ConsumerWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: watch.isEmpty ? const Text('Note') : Text(watch[selected].title),
+        title: Text(watch.isEmpty ? 'Note' : watch[selected].title),
         actions: const [
           HomeMenu(),
         ],
@@ -38,7 +38,7 @@ class HomePage extends ConsumerWidget {
                   );
                 },
               ),
-              const Divider(),
+              const Divider(height: 15),
               const FolderList(),
             ],
           ),

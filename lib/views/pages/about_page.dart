@@ -1,32 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import '../../controllers/links_pod.dart';
-
-class AboutPage extends ConsumerWidget {
+class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('About'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8),
+      body: const Padding(
+        padding: EdgeInsets.all(8),
         child: Column(
           children: [
-            const ListTile(
+            ListTile(
               leading: Icon(Icons.info_outline),
               title: Text('Version'),
-              subtitle: Text('0.1.0'),
+              subtitle: Text('0.1.2'),
             ),
             ListTile(
-              leading: const Icon(Icons.code),
-              title: const Text('Source Code'),
-              onTap: () => ref.watch(gitPod),
+              leading: Icon(Icons.code),
+              title: Text('Source Code'),
+              onTap: gitHub,
             ),
-            const ListTile(
+            ListTile(
               leading: Icon(Icons.person_outline),
               title: Text('Developed by kurioku'),
             ),
@@ -34,5 +32,12 @@ class AboutPage extends ConsumerWidget {
         ),
       ),
     );
+  }
+}
+
+Future<void> gitHub() async {
+  final github = Uri.parse('https://github.com/kurioku/note');
+  if (!await launchUrl(github)) {
+    throw Exception('Could not launch $github');
   }
 }

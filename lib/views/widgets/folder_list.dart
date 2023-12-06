@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../controllers/note_pod.dart';
-import '../../controllers/selected_pod.dart';
+import '/controllers/note_pod.dart';
+import '/controllers/selected_pod.dart';
 import '../dialogs/edit_folder.dart';
 
 class FolderList extends ConsumerWidget {
@@ -18,18 +18,13 @@ class FolderList extends ConsumerWidget {
       itemBuilder: (_, i) {
         return ListTile(
           selected: i == selected,
-          leading: Icon(
-            i == selected ? Icons.folder_open : Icons.folder,
-          ),
+          leading: Icon(i == selected ? Icons.folder_open : Icons.folder),
           title: Text(watch[i].title),
-          onTap: () {
-            final select = ref.read(selectedPod.notifier);
-            select.change(i);
-          },
+          onTap: () => ref.read(selectedPod.notifier).change(i),
           onLongPress: () {
             showDialog(
               context: context,
-              builder: (_) => EditFolder(folder: watch[i], index: i),
+              builder: (_) => EditFolder(folder: watch[i], i: i),
             );
           },
         );

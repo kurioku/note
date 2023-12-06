@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
+import '../main.dart';
 import '../utils/router/router.dart';
 import '../services/storage.dart';
 import '../models/note.dart';
@@ -11,14 +12,9 @@ const _uuid = Uuid();
 
 @riverpod
 class Folders extends _$Folders {
-  Future<void> _init() async {
-    state = await load();
-  }
-
   @override
   List<Folder> build() {
-    _init();
-    return [];
+    return list;
   }
 
   void addFolder(String title) {

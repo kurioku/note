@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/router/router.dart';
+import '/utils/router/router.dart';
 
 class HomeMenu extends StatelessWidget {
   const HomeMenu({super.key});

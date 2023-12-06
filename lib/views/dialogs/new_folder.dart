@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../controllers/note_pod.dart';
+import '/controllers/note_pod.dart';
 
 class NewFolder extends ConsumerWidget {
   const NewFolder({super.key});
@@ -16,8 +16,7 @@ class NewFolder extends ConsumerWidget {
       content: TextField(
         autofocus: true,
         onSubmitted: (v) {
-          final read = ref.read(foldersPod.notifier);
-          read.addFolder(v);
+          ref.read(foldersPod.notifier).addFolder(v);
         },
       ),
     );

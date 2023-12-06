@@ -2,7 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../utils/router/router.dart';
 import '../../main.dart';
-import '../../controllers/note_pod.dart';
+import 'note_pod.dart';
 
 part 'selected_pod.g.dart';
 
@@ -21,9 +21,9 @@ class Selected extends _$Selected {
     router.pop();
   }
 
-  void order(int selected, int index) {
+  void order(int i) {
     final watch = ref.watch(foldersPod);
-    if (selected > index || selected == watch.length - 1 && watch.length > 1) {
+    if (state > i || state == watch.length - 1 && watch.length > 1) {
       state = state - 1;
       prefs.setInt('selected', state);
     }

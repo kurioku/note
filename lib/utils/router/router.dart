@@ -1,10 +1,10 @@
 import 'package:go_router/go_router.dart';
 
-import '../../models/note.dart';
-import '../../views/pages/about_page.dart';
-import '../../views/pages/editor_page.dart';
-import '../../views/pages/home_page.dart';
-import '../../views/pages/settings_page.dart';
+import '/models/note.dart';
+import '/views/pages/about_page.dart';
+import '/views/pages/editor_page.dart';
+import '/views/pages/home_page.dart';
+import '/views/pages/settings_page.dart';
 
 final router = GoRouter(
   initialLocation: '/',
